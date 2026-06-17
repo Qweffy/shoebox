@@ -72,15 +72,14 @@ def _settings(*, gemini_api_key: str | None = None, groq_api_key: str | None = N
         ollama_model="qwen2.5:3b-instruct-q4_K_M",
         gemini_model="gemini-2.5-flash",
         groq_model="openai/gpt-oss-120b",
+        groq_vision_model="meta-llama/llama-4-scout-17b-16e-instruct",
     )
 
 
 def test_factory_returns_expected_types() -> None:
     assert isinstance(get_extractor("regex", _settings()), RegexExtractor)
     assert isinstance(get_extractor("local", _settings()), LocalExtractor)
-    assert isinstance(
-        get_extractor("gemini", _settings(gemini_api_key="k")), OpenAICompatExtractor
-    )
+    assert isinstance(get_extractor("gemini", _settings(gemini_api_key="k")), OpenAICompatExtractor)
     assert isinstance(get_extractor("groq", _settings(groq_api_key="k")), OpenAICompatExtractor)
 
 
@@ -105,4 +104,3 @@ def test_local_extractor_against_real_ollama() -> None:
     ).extract(ocr)
     assert fields.vendor is not None
     assert fields.total == Decimal("7.00")
-

@@ -26,6 +26,7 @@ class Settings:
     ollama_model: str
     gemini_model: str
     groq_model: str
+    groq_vision_model: str
 
 
 def load_settings() -> Settings:
@@ -36,4 +37,7 @@ def load_settings() -> Settings:
         ollama_model=os.environ.get("OLLAMA_MODEL", "qwen2.5:3b-instruct-q4_K_M"),
         gemini_model=os.environ.get("GEMINI_MODEL", "gemini-2.5-flash"),
         groq_model=os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b"),
+        groq_vision_model=os.environ.get(
+            "GROQ_VISION_MODEL", "meta-llama/llama-4-scout-17b-16e-instruct"
+        ),
     )
