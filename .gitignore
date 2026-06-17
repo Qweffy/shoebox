@@ -21,6 +21,11 @@ wheels/
 /data/receipts/*
 !/data/receipts/.gitkeep
 
+# Generated fine-tune data + model artifacts
+/data/finetune/
+/models/
+/adapters/
+
 # Generated output
 /ledger*.csv
 *.ledger.csv
