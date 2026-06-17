@@ -45,7 +45,7 @@
   </div>
   {% endfor %}
 </div>
-<p class="sb-mono" style="font-size:12px;color:var(--ink-muted);margin:16px 0 0">Cloud runs used free tiers; cost is a documented list-price-equivalent estimate. Local = electricity only.</p>
+<p class="sb-mono" style="font-size:12px;color:var(--ink-muted);margin:16px 0 0">Cloud runs used free tiers; cost is a documented list-price-equivalent estimate. Local = electricity only. Rows with many errors hit free-tier rate limits (no backoff) — see benchmark/RESULTS.md.</p>
 {% else %}
 <div class="sb-card" style="text-align:center;padding:64px 24px">
   <p style="font:400 16px Inter;color:var(--ink-secondary);margin:0">No benchmark yet. Run <span class="sb-mono">uv run python scripts/run_benchmark.py</span>.</p>

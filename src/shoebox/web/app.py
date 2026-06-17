@@ -18,8 +18,10 @@ from shoebox.web.benchmark_data import load_benchmark
 from shoebox.web.ledger_data import CATEGORY_COLORS, aggregate, load_ledger
 
 _WEB_DIR = Path(__file__).parent
-_LEDGER_PATH = Path("data/ledger.csv")
-_BENCHMARK_PATH = Path("benchmark/results.csv")
+# Project root (src/shoebox/web/app.py -> repo root), so data/ resolves regardless of CWD.
+_ROOT = _WEB_DIR.resolve().parents[2]
+_LEDGER_PATH = _ROOT / "data" / "ledger.csv"
+_BENCHMARK_PATH = _ROOT / "benchmark" / "results.csv"
 
 app = FastAPI(title="shoebox")
 app.mount("/static", StaticFiles(directory=_WEB_DIR / "static"), name="static")
