@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFAF7; --surface:#FFFFFF; --surface-sunken:#F4F2ED;
+  --ink:#16140F; --ink-secondary:#54504A; --ink-muted:#8C877E; --hairline:#E7E3DA;
+  --accent:#1C5D4C; --accent-soft:#E4EFE9; --accent-strong:#123F33;
+  --conf-high:#1C5D4C; --conf-mid:#B7791F; --conf-low:#B23A2E;
+  --danger:#B23A2E; --warning:#B7791F;
+  --success-soft:#E4EFE9; --warning-soft:#F6ECD6; --danger-soft:#F6E2DD;
+  --shadow-card:0 1px 2px rgba(22,20,15,0.04), 0 8px 24px rgba(22,20,15,0.06);
+  --shadow-overlay:0 8px 40px rgba(22,20,15,0.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+@keyframes sb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+@keyframes sb-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sb-ringpulse{0%{box-shadow:0 0 0 0 rgba(28,93,76,0.35)}100%{box-shadow:0 0 0 7px rgba(28,93,76,0)}}
+.sb-nav:hover{background:var(--surface-sunken)!important}
+.sb-link:hover{color:var(--accent-strong)!important}
+.sb-row:hover{background:var(--surface-sunken)!important}
+</style>
+</helmet>
+
+<div style="display:flex;height:100vh;overflow:hidden;background:var(--paper)">
+
+  <!-- NAV RAIL -->
+  <nav style="width:240px;flex:none;background:var(--surface);border-right:1px solid var(--hairline);display:flex;flex-direction:column;padding:24px 16px">
+    <div style="display:flex;align-items:center;gap:10px;padding:4px 8px 28px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+      <span style="font-family:Fraunces;font-optical-sizing:auto;font-weight:600;font-size:20px;letter-spacing:-0.01em">shoebox</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;color:var(--ink-secondary);font:500 14px Inter;text-decoration:none;border-left:2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Overview</a>
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;color:var(--ink-secondary);font:500 14px Inter;text-decoration:none;border-left:2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>Ledger</a>
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;background:var(--accent-soft);color:var(--accent);font:500 14px Inter;text-decoration:none;border-left:2px solid var(--accent)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" x2="17" y1="12" y2="12"/></svg>Import &amp; Scan</a>
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;color:var(--ink-secondary);font:500 14px Inter;text-decoration:none;border-left:2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="18" x2="18" y1="20" y2="14"/></svg>Benchmark</a>
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;color:var(--ink-secondary);font:500 14px Inter;text-decoration:none;border-left:2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </div>
+    <div style="margin-top:auto;padding:14px 12px;border:1px solid var(--hairline);border-radius:10px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:7px;height:7px;border-radius:999px;background:var(--accent);flex:none;{{ dotAnim }}"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span style="font:500 11px 'IBM Plex Mono';letter-spacing:0.06em;color:var(--accent)">{{ railSignal }}</span></div>
+      <p style="font:400 11px 'IBM Plex Mono';color:var(--ink-muted);margin:0">~/.shoebox/data · {{ railSize }}</p>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main style="flex:1;overflow-y:auto;position:relative">
+    <div style="max-width:1000px;margin:0 auto;width:100%;padding:40px 48px 72px">
+
+    <!-- HEADER -->
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:32px;flex-wrap:wrap">
+      <div>
+        <p style="font:600 12px Inter;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 10px">Import &amp; Scan</p>
+        <h1 style="font-family:Fraunces;font-optical-sizing:auto;font-weight:500;font-size:32px;letter-spacing:-0.01em;margin:0 0 6px">Add receipts</h1>
+        <p style="font:400 14px Inter;color:var(--ink-secondary);margin:0">Drop photos or PDFs — they're read on this device and never uploaded.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:none">
+        <span style="display:inline-flex;align-items:center;gap:7px;font:400 12px 'IBM Plex Mono';color:var(--ink-secondary)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/></svg>Model: Qwen-3B (local)</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid var(--hairline);border-radius:999px;background:var(--surface)"><span style="width:6px;height:6px;border-radius:999px;background:var(--accent)"></span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span style="font:500 11px 'IBM Plex Mono';letter-spacing:0.05em;color:var(--accent)">ON-DEVICE · OFFLINE</span></span>
+      </div>
+    </div>
+
+    <!-- NO MODEL -->
+    <sc-if value="{{ isNoModel }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:16px;padding:28px;border:1px solid var(--hairline);border-left:3px solid var(--danger);border-radius:12px;background:var(--surface);box-shadow:var(--shadow-card)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B23A2E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        <div style="flex:1">
+          <h2 style="font-family:Fraunces;font-weight:500;font-size:22px;margin:0 0 6px">Local model isn't loaded — shoebox couldn't start the pipeline.</h2>
+          <p style="font:400 13px 'IBM Plex Mono';color:var(--ink-muted);margin:0 0 16px">Ollama not running? Start it and retry.</p>
+          <div style="display:flex;align-items:center;gap:14px"><button style="height:40px;padding:0 18px;border:none;border-radius:8px;background:var(--accent);color:#fff;font:500 14px Inter;cursor:pointer">Load Qwen-3B</button><a class="sb-link" href="#" style="font:500 14px Inter;color:var(--accent);text-decoration:none">Open Settings</a></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- STAGE 1: DROPZONE -->
+    <sc-if value="{{ isIdle }}" hint-placeholder-val="{{ true }}">
+      <div onDragOver="{{ onDragOver }}" onDragLeave="{{ onDragLeave }}" onDrop="{{ onDrop }}" style="border:2px dashed {{ dzBorder }};border-radius:12px;background:{{ dzBg }};padding:64px 32px;text-align:center;transition:background .15s,border-color .15s">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:14px;background:var(--accent-soft);margin-bottom:22px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" x2="17" y1="12" y2="12"/></svg></div>
+        <h2 style="font-family:Fraunces;font-weight:500;font-size:24px;margin:0 0 8px">{{ dzTitle }}</h2>
+        <p style="font:400 14px Inter;color:var(--ink-secondary);margin:0 0 20px">or</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px">
+          <button onClick="{{ startImport }}" style="height:44px;padding:0 22px;border:none;border-radius:8px;background:var(--accent);color:#fff;font:500 15px Inter;cursor:pointer">Browse files</button>
+          <button onClick="{{ startImport }}" style="height:44px;padding:0 18px;border:none;border-radius:8px;background:transparent;color:var(--ink-secondary);font:500 14px Inter;cursor:pointer;display:inline-flex;align-items:center;gap:8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="7" rx="1"/><rect x="4" y="14" width="16" height="7" rx="1"/><line x1="8" x2="8" y1="6.5" y2="6.5"/></svg>Scan from connected scanner</button>
+        </div>
+        <p style="font:400 12px 'IBM Plex Mono';color:var(--ink-muted);margin:0 0 28px">JPG · PNG · HEIC · PDF · up to 50 at once</p>
+        <div style="display:inline-flex;align-items:center;gap:9px;padding:10px 16px;border-radius:999px;background:var(--surface-sunken)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M8.5 16.42a5 5 0 0 1 7 0"/><path d="M5 12.86a10 10 0 0 1 5.17-2.7"/><path d="M19 12.86a10 10 0 0 0-3.3-2.2"/><path d="M2 8.82a15 15 0 0 1 4.17-2.65"/><path d="M22 8.82a15 15 0 0 0-11.4-3.4"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+          <span style="font:500 13px Inter;color:var(--accent-strong)">Processed locally with OCR + a local model. <span style="font-family:'IBM Plex Mono'">0 bytes</span> leave your Mac.</span>
+        </div>
+      </div>
+      <p style="text-align:center;font:400 13px Inter;color:var(--ink-muted);margin:22px 0 0">{{ recentLine }} <a class="sb-link" href="#" style="color:var(--accent);text-decoration:none">View in Ledger</a></p>
+    </sc-if>
+
+    <!-- STAGE 2: PROCESSING -->
+    <sc-if value="{{ isProcessing }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 18px;border:1px solid var(--hairline);border-radius:10px;background:var(--surface-sunken);margin-bottom:20px">
+        <span style="font:500 13px 'IBM Plex Mono';color:var(--ink-secondary)">{{ fileCount }} files</span>
+        <button onClick="{{ startImport }}" class="sb-link" style="border:none;background:transparent;color:var(--accent);font:500 13px Inter;cursor:pointer">+ add more</button>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:12px;padding:24px;box-shadow:var(--shadow-card);margin-bottom:18px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <h2 style="font-family:Fraunces;font-weight:500;font-size:20px;margin:0">{{ procHeading }}</h2>
+          <span style="font:500 13px 'IBM Plex Mono';color:var(--ink-secondary)">{{ procSub }}</span>
+        </div>
+        <div style="height:7px;border-radius:999px;background:var(--surface-sunken);overflow:hidden;margin-bottom:12px"><div style="height:100%;border-radius:999px;background:var(--accent);width:{{ overallW }};transition:width .2s"></div></div>
+        <div style="display:flex;align-items:center;gap:8px;font:400 12px 'IBM Plex Mono';color:var(--ink-muted)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Avg 2.1s/receipt · <span style="color:var(--accent)">0 bytes uploaded</span> · running on Qwen-3B (local)</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-card)">
+        <sc-for list="{{ queue }}" as="q" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 18px;border-bottom:1px solid var(--hairline);border-left:{{ q.edge }}">
+            <span style="width:34px;height:34px;border-radius:7px;flex:none;display:flex;align-items:center;justify-content:center;background:{{ q.thumbBg }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ q.thumbStroke }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 8h8"/><path d="M8 12h6"/></svg></span>
+            <span style="font:400 13px 'IBM Plex Mono';color:var(--ink-secondary);width:130px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ q.name }}</span>
+
+            <!-- READY summary -->
+            <sc-if value="{{ q.ready }}" hint-placeholder-val="{{ false }}">
+              <div style="flex:1;display:flex;align-items:center;gap:14px;min-width:0">
+                <span style="font:500 14px Inter;color:var(--ink);width:150px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ q.vendor }}</span>
+                <span style="font:500 14px 'IBM Plex Mono';color:var(--ink)">{{ q.totalStr }}</span>
+                <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:6px;background:{{ q.catSoft }};color:{{ q.catHex }};font:500 12px Inter"><span style="width:6px;height:6px;border-radius:999px;background:{{ q.catHex }}"></span>{{ q.cat }}</span>
+                <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:6px;background:{{ q.confSoft }};color:{{ q.confHex }};font:500 12px 'IBM Plex Mono';margin-left:auto">{{ q.conf }}<span style="font:500 11px Inter">{{ q.confLabel }}</span></span>
+                <span style="display:inline-flex;align-items:center;gap:5px;font:500 12px Inter;color:{{ q.readyColor }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>{{ q.readyLabel }}</span>
+              </div>
+            </sc-if>
+
+            <!-- ERROR row -->
+            <sc-if value="{{ q.errored }}" hint-placeholder-val="{{ false }}">
+              <div style="flex:1;display:flex;align-items:center;gap:14px">
+                <span style="font:500 13px Inter;color:var(--danger);flex:1">Couldn't read this image (too blurry?)</span>
+                <button class="sb-link" style="border:none;background:transparent;color:var(--accent);font:500 12px Inter;cursor:pointer">Retry</button>
+                <button class="sb-link" style="border:none;background:transparent;color:var(--ink-secondary);font:500 12px Inter;cursor:pointer">Skip</button>
+                <button class="sb-link" style="border:none;background:transparent;color:var(--ink-secondary);font:500 12px Inter;cursor:pointer">Open file</button>
+              </div>
+            </sc-if>
+
+            <!-- RUNNING / QUEUED stepper -->
+            <sc-if value="{{ q.active }}" hint-placeholder-val="{{ true }}">
+              <div style="flex:1;display:flex;align-items:center;gap:0">
+                <sc-for list="{{ q.steps }}" as="st" hint-placeholder-count="3">
+                  <sc-if value="{{ st.hasLine }}" hint-placeholder-val="{{ false }}"><div style="width:28px;height:2px;background:{{ st.lineColor }}"></div></sc-if>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="width:22px;height:22px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;background:{{ st.nodeBg }};border:{{ st.nodeBorder }};{{ st.nodeAnim }}">{{ st.nodeInner }}</span>
+                    <span style="font:500 11px Inter;color:{{ st.labelColor }}">{{ st.label }}</span>
+                  </div>
+                </sc-for>
+                <span style="font:400 11px 'IBM Plex Mono';color:var(--ink-muted);margin-left:16px">{{ q.microLabel }}</span>
+                <button onClick="{{ q.cancel }}" class="sb-link" style="border:none;background:transparent;color:var(--ink-muted);font:500 12px Inter;cursor:pointer;margin-left:auto">Cancel</button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="display:flex;justify-content:flex-end;padding:12px 18px"><button onClick="{{ cancelAll }}" class="sb-link" style="border:none;background:transparent;color:var(--ink-secondary);font:500 13px Inter;cursor:pointer">Cancel all</button></div>
+      </div>
+    </sc-if>
+
+    <!-- STAGE 3: REVIEW -->
+    <sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+      <p style="font:600 11px Inter;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 8px">Review before saving</p>
+      <h2 style="font-family:Fraunces;font-weight:500;font-size:24px;margin:0 0 4px">{{ reviewHeading }}</h2>
+      <p style="font:400 13px 'IBM Plex Mono';color:var(--ink-secondary);margin:0 0 22px">{{ reviewSummary }}</p>
+
+      <div style="background:var(--surface);border:1px solid var(--hairline);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-card)">
+        <sc-for list="{{ reviewRows }}" as="r" hint-placeholder-count="6">
+          <div class="sb-row" style="display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--hairline);border-left:{{ r.edge }};background:{{ r.bg }}">
+            <input type="checkbox" checked="{{ r.selected }}" onChange="{{ r.toggle }}" style="width:16px;height:16px;accent-color:#1C5D4C;cursor:pointer;flex:none">
+            <span style="width:32px;height:32px;border-radius:7px;flex:none;display:flex;align-items:center;justify-content:center;background:{{ r.catSoft }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{ r.catHex }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 8h8"/><path d="M8 12h6"/></svg></span>
+            <span style="font:500 14px Inter;color:var(--ink);width:160px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.vendor }}</span>
+            <span style="font:400 12px 'IBM Plex Mono';color:var(--ink-muted);width:92px;flex:none">{{ r.date }}</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:6px;background:{{ r.catSoft }};color:{{ r.catHex }};font:500 12px Inter;flex:none"><span style="width:6px;height:6px;border-radius:999px;background:{{ r.catHex }}"></span>{{ r.cat }}</span>
+            <span style="font:500 14px 'IBM Plex Mono';color:var(--ink);margin-left:auto;width:84px;text-align:right;flex:none">{{ r.totalStr }}</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:6px;background:{{ r.confSoft }};color:{{ r.confHex }};font:500 12px 'IBM Plex Mono';flex:none;width:120px;justify-content:center">{{ r.conf }}<span style="font:500 11px Inter">{{ r.confLabel }}</span></span>
+            <sc-if value="{{ r.flagged }}" hint-placeholder-val="{{ false }}"><a class="sb-link" href="#" style="font:500 12px Inter;color:var(--accent);text-decoration:none;width:64px;text-align:right;flex:none">Review →</a></sc-if>
+            <sc-if value="{{ r.clean }}" hint-placeholder-val="{{ true }}"><span style="width:64px;flex:none"></span></sc-if>
+          </div>
+        </sc-for>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--surface-sunken)">
+          <span style="font:500 13px 'IBM Plex Mono';color:var(--ink-secondary)">{{ selCount }} receipts · {{ selTotal }}</span>
+          <span style="font:500 13px Inter;color:var(--warning)">{{ needReviewLabel }}</span>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap">
+        <button onClick="{{ addToLedger }}" style="height:44px;padding:0 22px;border:none;border-radius:8px;background:var(--accent);color:#fff;font:500 15px Inter;cursor:pointer">Add {{ selCount }} to ledger</button>
+        <button style="height:44px;padding:0 18px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);color:var(--ink);font:500 14px Inter;cursor:pointer">Review flagged first ({{ flagCount }})</button>
+        <button onClick="{{ discard }}" style="height:44px;padding:0 14px;border:none;background:transparent;color:var(--ink-secondary);font:500 14px Inter;cursor:pointer">Discard</button>
+        <p style="font:400 12px Inter;color:var(--ink-muted);margin:0;flex:1;min-width:220px">Nothing is saved to your ledger until you confirm — editing here writes the correction as ground truth.</p>
+      </div>
+    </sc-if>
+
+    </div>
+
+    <!-- TOAST -->
+    <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+      <div style="position:fixed;bottom:24px;right:24px;z-index:50;display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--surface);border:1px solid var(--hairline);border-left:3px solid var(--accent);border-radius:10px;box-shadow:var(--shadow-overlay);animation:sb-rise .2s ease">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M20 6 9 17l-5-5"/></svg>
+        <p style="font:500 13px Inter;color:var(--ink);margin:0">{{ toastMsg }}</p>
+        <a class="sb-link" href="#" style="font:500 13px Inter;color:var(--accent);text-decoration:none;margin-left:8px;white-space:nowrap">View in Ledger</a>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:820},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;idle&quot;,&quot;processing&quot;,&quot;review&quot;,&quot;fileerror&quot;,&quot;nomodel&quot;,&quot;success&quot;],&quot;default&quot;:&quot;idle&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  catColors = {Groceries:'#5C7457',Meals:'#8A5A44',Travel:'#3A6EA5',Transport:'#45758A',Office:'#B7791F',Utilities:'#2F6F62',Software:'#6B5B95',Other:'#8C877E'};
+  targets(){
+    const d=(name,vendor,total,cat,conf,date)=>({name,vendor,total,cat,conf,date});
+    return [
+      d('IMG_4471.jpg','Sweetgreen',16.25,'Meals',99,'2026-06-15'),
+      d('IMG_4472.jpg','United Airlines',312.00,'Travel',92,'2026-06-15'),
+      d('IMG_4473.heic','Blue Bottle Coffee',18.50,'Meals',96,'2026-06-15'),
+      d('IMG_4474.pdf','Amazon Web Services',144.00,'Software',94,'2026-06-14'),
+      d('IMG_4475.jpg','Whole Foods Market',86.42,'Groceries',96,'2026-06-14'),
+      d('IMG_4476.jpg','Office Depot',43.20,'Office',71,'2026-06-14'),
+      d('IMG_4477.jpg','Shell',54.10,'Transport',93,'2026-06-13'),
+      d('IMG_4478.jpg','Figma',144.00,'Software',96,'2026-06-13'),
+      d('IMG_4479.heic','Uber',24.80,'Travel',64,'2026-06-12'),
+      d('IMG_4480.pdf','City Water Dept',198.00,'Utilities',99,'2026-06-12'),
+      d('IMG_4481.jpg','Sweetgreen',14.50,'Meals',95,'2026-06-11'),
+      d('IMG_4482.jpg','Staples',78.43,'Office',92,'2026-06-11'),
+    ];
+  }
+  state = { stage:'idle', dragging:false, files:[], clock:0, selected:[], toast:false, toastMsg:'', imported:0 };
+  componentDidMount(){ const v=this.props.state; if(v && v!=='idle') this.applyProp(v); }
+  componentDidUpdate(prev){ if(prev.state!==this.props.state) this.applyProp(this.props.state||'idle'); }
+  componentWillUnmount(){ clearInterval(this._iv); }
+  applyProp(v){ clearInterval(this._iv);
+    if(v==='processing'){ this.startImport(); }
+    else if(v==='review'){ this.setState({stage:'review', files:this.readyFiles(), selected:this.targets().map((_,i)=>i)}); }
+    else if(v==='fileerror'){ const fs=this.readyFiles(); fs[5]={...fs[5],status:'error'}; this.setState({stage:'processing',files:fs,clock:99}); }
+    else if(v==='nomodel'){ this.setState({stage:'nomodel'}); }
+    else if(v==='success'){ this.setState({stage:'idle',toast:true,toastMsg:'Added 12 receipts to your ledger.',imported:12}); }
+    else { this.setState({stage:'idle'}); }
+  }
+  readyFiles(){ return this.targets().map((t,i)=>({...t, id:i, fp:3, startAt:0, status:'error'===t.status?'error':'ready'})); }
+  hexToRgba(hex,a){const c=hex.replace('#','');return `rgba(${parseInt(c.slice(0,2),16)},${parseInt(c.slice(2,4),16)},${parseInt(c.slice(4,6),16)},${a})`;}
+  fmt(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  confMeta(c){ if(c>=90) return {label:'High',hex:'var(--conf-high)',soft:'var(--success-soft)'}; if(c>=70) return {label:'Review',hex:'var(--conf-mid)',soft:'var(--warning-soft)'}; return {label:'Low',hex:'var(--conf-low)',soft:'var(--danger-soft)'}; }
+  startImport(){ clearInterval(this._iv); const files=this.targets().map((t,i)=>({...t,id:i,fp:0,startAt:i*0.42,status:'queued'})); this.setState({stage:'processing',files,clock:0,selected:[]});
+    this._iv=setInterval(()=>this.tick(),150);
+  }
+  tick(){ this.setState(s=>{ if(s.stage!=='processing') return {}; const clock=s.clock+0.15; let allReady=true; const files=s.files.map(f=>{ if(f.status==='error') return f; let fp=f.fp; if(clock>=f.startAt) fp=Math.min(3,f.fp+0.20); const status= clock<f.startAt?'queued': fp>=3?'ready':'running'; if(status!=='ready') allReady=false; return {...f,fp,status}; }); if(allReady){ clearInterval(this._iv); clearTimeout(this._rt); this._rt=setTimeout(()=>this.setState({stage:'review',selected:this.state.files.map(f=>f.id)}),550); } return {clock,files}; }); }
+  cancelFile(id){ this.setState(s=>({files:s.files.filter(f=>f.id!==id)})); }
+  renderVals(){
+    const s=this.state; const stage=s.stage;
+    const isProcessing=stage==='processing';
+    const running = isProcessing && s.files.some(f=>f.status==='running'||f.status==='queued');
+    const stepNames=['OCR','Extract','Classify']; const microNames=['OCR… '+(1.0+Math.random()*0.6).toFixed(1)+'s','Pulling fields…','Categorizing…'];
+    const queue=s.files.map(f=>{
+      const m=this.confMeta(f.conf); const ready=f.status==='ready'; const errored=f.status==='error';
+      const step=Math.min(3,Math.floor(f.fp));
+      const steps=stepNames.map((nm,i)=>{ const done=i<step||ready; const active=i===step&&f.status==='running';
+        return { label:nm, hasLine:i>0, lineColor: (i<=step||ready)?'var(--accent)':'var(--hairline)',
+          nodeBg: done?'var(--accent)':(active?'var(--surface)':'var(--surface)'),
+          nodeBorder: done?'none':(active?'2px solid var(--accent)':'2px solid var(--hairline)'),
+          nodeAnim: active?'animation:sb-ringpulse 1.1s ease-out infinite':'',
+          nodeInner: done? React.createElement('svg',{width:12,height:12,viewBox:'0 0 24 24',fill:'none',stroke:'#fff','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'},React.createElement('path',{d:'M20 6 9 17l-5-5'})) : '',
+          labelColor: (done||active)?'var(--ink)':'var(--ink-muted)' };
+      });
+      return { id:f.id, name:f.name, ready, errored, active: !ready&&!errored,
+        edge: errored?'2px solid var(--danger)':(ready&&f.conf<90?'2px solid '+(f.conf<70?'var(--conf-low)':'var(--conf-mid)'):'2px solid transparent'),
+        thumbBg:this.hexToRgba(this.catColors[f.cat]||'#8C877E',0.14), thumbStroke:this.catColors[f.cat]||'#8C877E',
+        vendor:f.vendor, totalStr:this.fmt(f.total), cat:f.cat, catHex:this.catColors[f.cat], catSoft:this.hexToRgba(this.catColors[f.cat],0.14),
+        conf:f.conf+'%', confLabel:m.label, confHex:m.hex, confSoft:m.soft,
+        readyColor: f.conf<90?'var(--warning)':'var(--accent)', readyLabel: f.conf<90?'Ready (review)':'Ready',
+        steps, microLabel: f.status==='running'? microNames[step]||'' : (f.status==='queued'?'Queued':''),
+        cancel:()=>this.cancelFile(f.id) };
+    });
+    const done=s.files.filter(f=>f.status==='ready').length, run=s.files.filter(f=>f.status==='running').length, q=s.files.filter(f=>f.status==='queued').length, err=s.files.filter(f=>f.status==='error').length;
+    const total=s.files.length||12;
+    const overallPct = total? Math.round(s.files.reduce((t,f)=>t+(f.status==='error'?3:Math.min(f.fp,3)),0)/(total*3)*100):0;
+    const procHeading = err&&!run&&!q ? `${done} of ${total} succeeded · ${err} failed` : `Processing ${total} receipts`;
+    const etaLeft=Math.max(0,Math.round((run+q)*1.8));
+    const procSub = err&&!run&&!q ? `${done} ready · ${err} failed` : `${done} done · ${run} running · ${q} queued · est. ${etaLeft}s left`;
+
+    // review
+    const rows=this.targets().map((t,i)=>({...t,id:i})).sort((a,b)=>(a.conf<90?0:1)-(b.conf<90?0:1));
+    const reviewRows=rows.map(t=>{ const m=this.confMeta(t.conf); const sel=s.selected.includes(t.id); const flag=t.conf<90;
+      return { id:t.id, vendor:t.vendor, date:t.date, totalStr:this.fmt(t.total), cat:t.cat, catHex:this.catColors[t.cat], catSoft:this.hexToRgba(this.catColors[t.cat],0.14),
+        conf:t.conf+'%', confLabel:m.label, confHex:m.hex, confSoft:m.soft, flagged:flag, clean:!flag,
+        selected:sel, bg: flag?this.hexToRgba('#B23A2E',0.03):'transparent',
+        edge: flag?'2px solid '+(t.conf<70?'var(--conf-low)':'var(--conf-mid)'):'2px solid transparent',
+        toggle:()=>this.setState(st=>({selected: st.selected.includes(t.id)? st.selected.filter(x=>x!==t.id):[...st.selected,t.id]})) };
+    });
+    const selCount=s.selected.length;
+    const selTotal=this.fmt(this.targets().filter((_,i)=>s.selected.includes(i)).reduce((tt,t)=>tt+t.total,0));
+    const flagCount=this.targets().filter(t=>t.conf<90).length;
+
+    return {
+      isIdle: stage==='idle', isProcessing, isReview: stage==='review', isNoModel: stage==='nomodel',
+      dotAnim: running?'animation:sb-pulse 1.3s ease-in-out infinite':'', railSignal: running?'WORKING LOCALLY…':'OFFLINE · ON-DEVICE',
+      railSize: (2.5 + s.imported*0.01).toFixed(1)+' GB local',
+      dragging:s.dragging, dzBorder: s.dragging?'var(--accent)':'var(--hairline)', dzBg: s.dragging?'var(--accent-soft)':'var(--surface)',
+      dzTitle: s.dragging?'Release to import — stays on this device':'Drop receipts here',
+      recentLine: s.imported? `${141+s.imported} receipts now on this Mac · last import just now`:'Recently imported: 12 receipts · 2m ago',
+      onDragOver:(e)=>{ e.preventDefault(); if(!s.dragging) this.setState({dragging:true}); },
+      onDragLeave:(e)=>{ e.preventDefault(); this.setState({dragging:false}); },
+      onDrop:(e)=>{ e.preventDefault(); this.setState({dragging:false}); this.startImport(); },
+      startImport:()=>this.startImport(),
+      queue, fileCount:total, procHeading, procSub, overallW: overallPct+'%',
+      cancelAll:()=>this.setState({stage:'idle',files:[]}),
+      reviewHeading:`${this.targets().length} read · ${flagCount} need your eye.`, reviewSummary:`${this.targets().length} receipts · ${this.fmt(this.targets().reduce((t,x)=>t+x.total,0))} · ${flagCount} need review`,
+      reviewRows, selCount, selTotal, flagCount, needReviewLabel: flagCount+' need review',
+      addToLedger:()=>{ const n=s.selected.length; this.setState({stage:'idle',toast:true,toastMsg:`Added ${n} receipts to your ledger.`,imported:n,files:[]}); clearTimeout(this._tt); this._tt=setTimeout(()=>this.setState({toast:false}),3600); },
+      discard:()=>this.setState({stage:'idle',files:[],selected:[]}),
+      toast:s.toast, toastMsg:s.toastMsg,
+    };
+  }
+}
+</script>
+</body>
+</html>

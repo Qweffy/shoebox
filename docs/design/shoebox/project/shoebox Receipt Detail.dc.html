@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFAF7; --surface:#FFFFFF; --surface-sunken:#F4F2ED;
+  --ink:#16140F; --ink-secondary:#54504A; --ink-muted:#8C877E; --hairline:#E7E3DA;
+  --accent:#1C5D4C; --accent-soft:#E4EFE9; --accent-strong:#123F33;
+  --conf-high:#1C5D4C; --conf-mid:#B7791F; --conf-low:#B23A2E;
+  --danger:#B23A2E; --warning:#B7791F;
+  --success-soft:#E4EFE9; --warning-soft:#F6ECD6; --danger-soft:#F6E2DD;
+  --shadow-card:0 1px 2px rgba(22,20,15,0.04), 0 8px 24px rgba(22,20,15,0.06);
+  --shadow-overlay:0 8px 40px rgba(22,20,15,0.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+@keyframes sb-shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+@keyframes sb-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sb-nav:hover{background:var(--surface-sunken)!important}
+.sb-link:hover{color:var(--accent-strong)!important}
+.sb-fieldline:hover .sb-box{background:rgba(28,93,76,0.22)!important;border-color:#1C5D4C!important}
+.sb-ctrl:hover{background:var(--surface)!important;color:var(--ink)!important}
+</style>
+</helmet>
+
+<div style="display:flex;height:100vh;overflow:hidden;background:var(--paper)">
+
+  <!-- NAV RAIL -->
+  <nav style="width:240px;flex:none;background:var(--surface);border-right:1px solid var(--hairline);display:flex;flex-direction:column;padding:24px 16px">
+    <div style="display:flex;align-items:center;gap:10px;padding:4px 8px 28px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+      <span style="font-family:Fraunces;font-optical-sizing:auto;font-weight:600;font-size:20px;letter-spacing:-0.01em">shoebox</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;color:var(--ink-secondary);font:500 14px Inter;text-decoration:none;border-left:2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Overview</a>
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;background:var(--accent-soft);color:var(--accent);font:500 14px Inter;text-decoration:none;border-left:2px solid var(--accent)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>Ledger</a>
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;color:var(--ink-secondary);font:500 14px Inter;text-decoration:none;border-left:2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" x2="17" y1="12" y2="12"/></svg>Import &amp; Scan</a>
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;color:var(--ink-secondary);font:500 14px Inter;text-decoration:none;border-left:2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="18" x2="18" y1="20" y2="14"/></svg>Benchmark</a>
+      <a class="sb-nav" style="display:flex;align-items:center;gap:12px;height:40px;padding:0 12px;border-radius:8px;color:var(--ink-secondary);font:500 14px Inter;text-decoration:none;border-left:2px solid transparent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </div>
+    <div style="margin-top:auto;padding:14px 12px;border:1px solid var(--hairline);border-radius:10px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:7px;height:7px;border-radius:999px;background:var(--accent);flex:none"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span style="font:500 11px 'IBM Plex Mono';letter-spacing:0.06em;color:var(--accent)">OFFLINE · ON-DEVICE</span></div>
+      <p style="font:400 11px 'IBM Plex Mono';color:var(--ink-muted);margin:0">~/.shoebox/data · 2.5 GB local</p>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main style="flex:1;overflow-y:auto;position:relative">
+    <div style="max-width:1240px;margin:0 auto;width:100%;padding:28px 40px 56px">
+
+    <!-- HEADER -->
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:18px">
+      <a class="sb-link" href="#" style="display:inline-flex;align-items:center;gap:6px;font:500 13px Inter;color:var(--ink-secondary);text-decoration:none"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Ledger</a>
+      <span style="color:var(--ink-muted)">/</span>
+      <span style="font:500 13px Inter;color:var(--ink)">{{ vendorName }}</span>
+    </div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:8px;flex-wrap:wrap">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <h1 style="font-family:Fraunces;font-optical-sizing:auto;font-weight:500;font-size:24px;letter-spacing:-0.01em;margin:0">{{ vendorName }}</h1>
+          <sc-if value="{{ anyEdited }}" hint-placeholder-val="{{ false }}"><span style="font:500 11px 'IBM Plex Mono';letter-spacing:0.04em;color:var(--warning);background:var(--warning-soft);padding:3px 8px;border-radius:5px">UNSAVED CHANGES</span></sc-if>
+        </div>
+        <p style="font:400 13px 'IBM Plex Mono';color:var(--ink-secondary);margin:6px 0 0">{{ subtitle }}</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex:none">
+        <span style="display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 12px;border-radius:7px;background:{{ overallSoft }};color:{{ overallColor }};font:500 13px 'IBM Plex Mono'">{{ overallPct }}<span style="font:500 12px Inter">· {{ overallLabel }}</span></span>
+        <button onClick="{{ rerun }}" style="height:36px;padding:0 14px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);color:var(--ink);font:500 13px Inter;cursor:pointer;display:inline-flex;align-items:center;gap:7px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>Re-run</button>
+        <button onClick="{{ save }}" disabled="{{ saveDisabled }}" style="height:36px;padding:0 16px;border:none;border-radius:8px;background:var(--accent);color:#fff;font:500 13px Inter;cursor:pointer;opacity:{{ saveOpacity }}">Save changes</button>
+        <button style="width:36px;height:36px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);color:var(--ink-secondary);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:18px;font:400 12px 'IBM Plex Mono';color:var(--ink-muted)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/></svg>Editing locally</div>
+
+    <!-- TOP NOTE (low conf) -->
+    <sc-if value="{{ showLowNote }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px;padding:14px 18px;border:1px solid var(--hairline);border-left:3px solid var(--warning);border-radius:10px;background:var(--warning-soft)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B7791F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        <p style="font:500 13px Inter;color:var(--ink);margin:0">A few fields look uncertain — confirm or correct them. <span style="color:var(--ink-secondary)">Corrections help the model learn.</span></p>
+      </div>
+    </sc-if>
+    <!-- CLEAN hint -->
+    <sc-if value="{{ showCleanNote }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px;padding:14px 18px;border:1px solid var(--accent);border-radius:10px;background:var(--accent-soft)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M20 6 9 17l-5-5"/></svg>
+        <p style="font:500 13px Inter;color:var(--accent-strong);margin:0">Looks clean. <span style="color:var(--accent)">Mark reviewed?</span></p>
+      </div>
+    </sc-if>
+
+    <!-- TWO PANE -->
+    <div style="display:grid;grid-template-columns:48fr 52fr;gap:28px;align-items:start">
+
+      <!-- LEFT: image + OCR -->
+      <div style="position:sticky;top:20px">
+        <div style="position:relative;background:var(--surface-sunken);border:1px solid var(--hairline);border-radius:12px;padding:28px;display:flex;align-items:center;justify-content:center;min-height:520px;box-shadow:inset 0 2px 8px rgba(22,20,15,0.06)">
+          <!-- viewer controls -->
+          <div style="position:absolute;top:12px;right:12px;z-index:5;display:flex;gap:4px;background:var(--surface);border:1px solid var(--hairline);border-radius:9px;padding:4px;box-shadow:var(--shadow-card)">
+            <button class="sb-ctrl" style="width:30px;height:30px;border:none;background:transparent;border-radius:6px;color:var(--ink-secondary);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><line x1="8" x2="14" y1="11" y2="11"/><line x1="11" x2="11" y1="8" y2="14"/></svg></button>
+            <button class="sb-ctrl" style="width:30px;height:30px;border:none;background:transparent;border-radius:6px;color:var(--ink-secondary);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><line x1="8" x2="14" y1="11" y2="11"/></svg></button>
+            <button class="sb-ctrl" style="width:30px;height:30px;border:none;background:transparent;border-radius:6px;color:var(--ink-secondary);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg></button>
+            <button class="sb-ctrl" style="width:30px;height:30px;border:none;background:transparent;border-radius:6px;color:var(--ink-secondary);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button>
+            <div style="width:1px;background:var(--hairline);margin:2px 2px"></div>
+            <button onClick="{{ toggleBoxes }}" title="Show OCR boxes" style="width:30px;height:30px;border:none;background:{{ boxesBtnBg }};border-radius:6px;color:{{ boxesBtnFg }};cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+          </div>
+
+          <!-- IMAGE MISSING -->
+          <sc-if value="{{ imageMissing }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;max-width:280px">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#C9C3B7" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:18px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>
+              <p style="font:500 14px Inter;color:var(--ink-secondary);margin:0 0 4px">Original image not found</p>
+              <p style="font:400 12px 'IBM Plex Mono';color:var(--ink-muted);margin:0 0 18px;word-break:break-all">~/.shoebox/img/00482.jpg</p>
+              <div style="display:flex;gap:10px;justify-content:center"><button style="height:36px;padding:0 14px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);font:500 13px Inter;cursor:pointer">Locate file</button><button style="height:36px;padding:0 14px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);font:500 13px Inter;cursor:pointer">Re-import</button></div>
+            </div>
+          </sc-if>
+
+          <!-- RECEIPT PAPER -->
+          <sc-if value="{{ showImage }}" hint-placeholder-val="{{ true }}">
+          <div style="width:268px;background:#fff;border-radius:2px;box-shadow:0 6px 22px rgba(22,20,15,0.14);padding:24px 22px;transform:rotate(-1.3deg);font-family:'IBM Plex Mono';color:#2A2620;font-size:12px;line-height:1.5">
+            <div class="sb-fieldline" onMouseEnter="{{ f.vendor.activate }}" style="position:relative;text-align:center;margin-bottom:2px"><div class="sb-box" style="position:absolute;inset:-2px -6px;border-radius:3px;background:{{ f.vendor.boxBg }};border:{{ f.vendor.boxBorder }}"></div><span style="position:relative;font-weight:600;font-size:14px;letter-spacing:0.04em">{{ vendorUpper }}</span></div>
+            <div style="text-align:center;color:#8C877E;font-size:11px;margin-bottom:8px">{{ addressLine }}</div>
+            <div class="sb-fieldline" onMouseEnter="{{ f.date.activate }}" style="position:relative;text-align:center;margin-bottom:10px"><div class="sb-box" style="position:absolute;inset:-2px -6px;border-radius:3px;background:{{ f.date.boxBg }};border:{{ f.date.boxBorder }}"></div><span style="position:relative">{{ f.date.value }} · 09:42</span></div>
+            <div style="border-top:1px dashed #D8D2C6;margin:8px 0"></div>
+            <sc-for list="{{ paperItems }}" as="it" hint-placeholder-count="3">
+              <div class="sb-fieldline" onMouseEnter="{{ it.activate }}" style="position:relative;display:flex;justify-content:space-between;gap:8px;margin-bottom:5px"><div class="sb-box" style="position:absolute;inset:-2px -6px;border-radius:3px;background:{{ it.boxBg }};border:{{ it.boxBorder }}"></div><span style="position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ it.desc }} ×{{ it.qty }}</span><span style="position:relative;flex:none">{{ it.priceStr }}</span></div>
+            </sc-for>
+            <div style="border-top:1px dashed #D8D2C6;margin:8px 0"></div>
+            <div class="sb-fieldline" onMouseEnter="{{ f.subtotal.activate }}" style="position:relative;display:flex;justify-content:space-between;margin-bottom:4px"><div class="sb-box" style="position:absolute;inset:-2px -6px;border-radius:3px;background:{{ f.subtotal.boxBg }};border:{{ f.subtotal.boxBorder }}"></div><span style="position:relative;color:#8C877E">Subtotal</span><span style="position:relative">{{ f.subtotal.money }}</span></div>
+            <div class="sb-fieldline" onMouseEnter="{{ f.tax.activate }}" style="position:relative;display:flex;justify-content:space-between;margin-bottom:4px"><div class="sb-box" style="position:absolute;inset:-2px -6px;border-radius:3px;background:{{ f.tax.boxBg }};border:{{ f.tax.boxBorder }}"></div><span style="position:relative;color:#8C877E">Tax</span><span style="position:relative">{{ f.tax.money }}</span></div>
+            <div class="sb-fieldline" onMouseEnter="{{ f.total.activate }}" style="position:relative;display:flex;justify-content:space-between;margin-top:6px"><div class="sb-box" style="position:absolute;inset:-2px -6px;border-radius:3px;background:{{ f.total.boxBg }};border:{{ f.total.boxBorder }}"></div><span style="position:relative;font-weight:600">TOTAL</span><span style="position:relative;font-weight:600">{{ f.total.money }}</span></div>
+            <div style="border-top:1px dashed #D8D2C6;margin:10px 0 8px"></div>
+            <div class="sb-fieldline" onMouseEnter="{{ f.payment.activate }}" style="position:relative;text-align:center;margin-bottom:6px"><div class="sb-box" style="position:absolute;inset:-2px -6px;border-radius:3px;background:{{ f.payment.boxBg }};border:{{ f.payment.boxBorder }}"></div><span style="position:relative">{{ f.payment.value }}</span></div>
+            <div style="text-align:center;color:#8C877E;font-size:11px">Thank you!</div>
+          </div>
+          </sc-if>
+        </div>
+        <p style="font:400 11px 'IBM Plex Mono';color:var(--ink-muted);margin:12px 2px 8px;line-height:1.5">1,024 × 1,536 · read on-device in 1.2s · ~/.shoebox/img/00482.jpg</p>
+        <div style="display:flex;gap:18px;font:400 11px Inter;color:var(--ink-muted)"><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:14px;height:10px;border-radius:2px;background:rgba(28,93,76,0.14);border:1px solid rgba(28,93,76,0.32)"></span>detected text</span><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:14px;height:10px;border-radius:2px;background:rgba(28,93,76,0.22);border:1px solid #1C5D4C"></span>selected field</span></div>
+      </div>
+
+      <!-- RIGHT: fields -->
+      <div>
+        <p style="font:600 12px Inter;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 18px">Extracted fields</p>
+        <div style="display:flex;flex-direction:column;gap:18px">
+
+          <!-- VENDOR -->
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><label style="font:500 12px Inter;color:var(--ink-secondary)">Vendor</label>{{ f.vendor.tag }}</div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <input value="{{ f.vendor.value }}" onInput="{{ f.vendor.onInput }}" onFocus="{{ f.vendor.activate }}" style="flex:1;height:40px;padding:0 13px;border:1px solid {{ f.vendor.bcol }};border-left:3px solid {{ f.vendor.lcol }};border-radius:8px;background:var(--surface);color:var(--ink);font:500 14px Inter;box-shadow:{{ f.vendor.ring }}">
+              <div style="width:104px;flex:none">{{ f.vendor.ind }}</div>
+            </div>
+          </div>
+          <!-- DATE -->
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><label style="font:500 12px Inter;color:var(--ink-secondary)">Date</label>{{ f.date.tag }}</div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <input value="{{ f.date.value }}" onInput="{{ f.date.onInput }}" onFocus="{{ f.date.activate }}" style="flex:1;height:40px;padding:0 13px;border:1px solid {{ f.date.bcol }};border-left:3px solid {{ f.date.lcol }};border-radius:8px;background:var(--surface);color:var(--ink);font:400 14px 'IBM Plex Mono';box-shadow:{{ f.date.ring }}">
+              <div style="width:104px;flex:none">{{ f.date.ind }}</div>
+            </div>
+          </div>
+          <!-- PAYMENT -->
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><label style="font:500 12px Inter;color:var(--ink-secondary)">Payment</label>{{ f.payment.tag }}</div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <input value="{{ f.payment.value }}" onInput="{{ f.payment.onInput }}" onFocus="{{ f.payment.activate }}" style="flex:1;height:40px;padding:0 13px;border:1px solid {{ f.payment.bcol }};border-left:3px solid {{ f.payment.lcol }};border-radius:8px;background:var(--surface);color:var(--ink);font:400 14px 'IBM Plex Mono';box-shadow:{{ f.payment.ring }}">
+              <div style="width:104px;flex:none">{{ f.payment.ind }}</div>
+            </div>
+          </div>
+          <!-- CATEGORY -->
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <label style="font:500 12px Inter;color:var(--ink-secondary)">Category</label>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="position:relative;flex:1">
+                <select onChange="{{ f.category.onSelect }}" style="appearance:none;width:100%;height:40px;padding:0 36px 0 13px;border:1px solid {{ f.category.bcol }};border-left:3px solid {{ f.category.lcol }};border-radius:8px;background:var(--surface);color:var(--ink);font:500 14px Inter">{{ f.category.options }}</select>
+                <svg style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8C877E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+              <span style="width:104px;flex:none;font:400 12px 'IBM Plex Mono';color:var(--ink-muted)">classified · {{ f.category.pct }}</span>
+            </div>
+          </div>
+
+          <!-- LINE ITEMS -->
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+            <label style="font:500 12px Inter;color:var(--ink-secondary)">Line items</label>
+            <div style="border:1px solid var(--hairline);border-radius:10px;overflow:hidden">
+              <div style="display:grid;grid-template-columns:1fr 48px 84px 34px;gap:8px;padding:8px 12px;background:var(--surface-sunken);border-bottom:1px solid var(--hairline);font:600 11px Inter;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-muted)"><span>Description</span><span style="text-align:center">Qty</span><span style="text-align:right">Price</span><span></span></div>
+              <sc-for list="{{ items }}" as="it" hint-placeholder-count="3">
+                <div onMouseEnter="{{ it.activate }}" style="display:grid;grid-template-columns:1fr 48px 84px 34px;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--hairline);border-left:3px solid {{ it.lcol }}">
+                  <input value="{{ it.desc }}" onInput="{{ it.onDesc }}" style="height:32px;padding:0 10px;border:1px solid var(--hairline);border-radius:6px;background:var(--surface);font:400 13px Inter;color:var(--ink);min-width:0">
+                  <input value="{{ it.qty }}" onInput="{{ it.onQty }}" style="height:32px;padding:0;text-align:center;border:1px solid var(--hairline);border-radius:6px;background:var(--surface);font:400 13px 'IBM Plex Mono';color:var(--ink)">
+                  <input value="{{ it.priceStr }}" onInput="{{ it.onPrice }}" style="height:32px;padding:0 10px;text-align:right;border:1px solid var(--hairline);border-radius:6px;background:var(--surface);font:500 13px 'IBM Plex Mono';color:var(--ink)">
+                  <div style="display:flex;align-items:center;justify-content:center;gap:4px">{{ it.dot }}<button onClick="{{ it.remove }}" style="width:24px;height:24px;border:none;background:transparent;border-radius:5px;color:var(--ink-muted);cursor:pointer;display:inline-flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+                </div>
+              </sc-for>
+              <button onClick="{{ addItem }}" style="width:100%;height:38px;border:none;background:transparent;color:var(--ink-secondary);font:500 13px Inter;cursor:pointer;text-align:left;padding:0 12px;display:flex;align-items:center;gap:8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add line item</button>
+            </div>
+          </div>
+
+          <!-- TOTALS -->
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px;padding:18px;border:1px solid var(--hairline);border-radius:10px;background:var(--surface)">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><label style="font:500 13px Inter;color:var(--ink-secondary)">Subtotal</label><div style="display:flex;align-items:center;gap:12px"><div style="width:92px">{{ f.subtotal.indSm }}</div><input value="{{ f.subtotal.value }}" onInput="{{ f.subtotal.onInput }}" onFocus="{{ f.subtotal.activate }}" style="width:108px;height:36px;padding:0 12px;text-align:right;border:1px solid {{ f.subtotal.bcol }};border-left:3px solid {{ f.subtotal.lcol }};border-radius:7px;background:var(--surface);font:500 14px 'IBM Plex Mono';color:var(--ink);box-shadow:{{ f.subtotal.ring }}"></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><label style="font:500 13px Inter;color:var(--ink-secondary)">Tax</label><div style="display:flex;align-items:center;gap:12px"><div style="width:92px">{{ f.tax.indSm }}</div><input value="{{ f.tax.value }}" onInput="{{ f.tax.onInput }}" onFocus="{{ f.tax.activate }}" style="width:108px;height:36px;padding:0 12px;text-align:right;border:1px solid {{ f.tax.bcol }};border-left:3px solid {{ f.tax.lcol }};border-radius:7px;background:var(--surface);font:500 14px 'IBM Plex Mono';color:var(--ink);box-shadow:{{ f.tax.ring }}"></div></div>
+            <div style="height:1px;background:var(--hairline)"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font-family:Fraunces;font-optical-sizing:auto;font-weight:600;font-size:20px">Total</span><div style="display:flex;align-items:center;gap:12px"><div style="width:92px">{{ f.total.indSm }}</div><input value="{{ f.total.value }}" onInput="{{ f.total.onInput }}" onFocus="{{ f.total.activate }}" style="width:130px;height:46px;padding:0 14px;text-align:right;border:1px solid {{ f.total.bcol }};border-left:3px solid {{ f.total.lcol }};border-radius:8px;background:var(--surface);font:600 22px 'IBM Plex Mono';color:var(--ink);box-shadow:{{ f.total.ring }}"></div></div>
+          </div>
+
+          <!-- RECONCILE -->
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;background:{{ recoSoft }};border:1px solid {{ recoBorder }}">
+            {{ recoIcon }}
+            <p style="font:500 13px Inter;color:{{ recoColor }};margin:0">{{ recoText }}</p>
+          </div>
+
+          <!-- NOTE -->
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <label style="font:500 12px Inter;color:var(--ink-secondary)">Note <span style="color:var(--ink-muted);font-weight:400">(optional)</span></label>
+            <input value="{{ f.note.value }}" onInput="{{ f.note.onInput }}" placeholder="Add a note (e.g. client meeting)." style="height:40px;padding:0 13px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface-sunken);color:var(--ink);font:400 14px Inter">
+          </div>
+
+          <!-- FOOTNOTE -->
+          <div style="display:flex;align-items:center;gap:9px;margin-top:6px;padding-top:16px;border-top:1px solid var(--hairline)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8C877E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <p style="font:400 12px Inter;color:var(--ink-muted);margin:0">Your corrections train shoebox's local model — and never leave this device.</p>
+          </div>
+          <button class="sb-link" style="align-self:flex-start;border:none;background:transparent;color:var(--danger);font:500 13px Inter;cursor:pointer;padding:4px 0">Delete receipt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW LOOP FOOTER -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:36px;padding-top:24px;border-top:1px solid var(--hairline)">
+      <button onClick="{{ prev }}" style="display:inline-flex;align-items:center;gap:10px;height:42px;padding:0 16px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);font:500 13px Inter;color:var(--ink-secondary);cursor:pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span style="width:7px;height:7px;border-radius:999px;background:{{ prevDot }}"></span>Prev · {{ prevName }}</button>
+      <button onClick="{{ saveNext }}" style="height:42px;padding:0 22px;border:none;border-radius:8px;background:var(--accent);color:#fff;font:500 14px Inter;cursor:pointer;display:inline-flex;align-items:center;gap:8px">Save &amp; next<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      <button onClick="{{ next }}" style="display:inline-flex;align-items:center;gap:10px;height:42px;padding:0 16px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);font:500 13px Inter;color:var(--ink-secondary);cursor:pointer">Next · {{ nextName }}<span style="width:7px;height:7px;border-radius:999px;background:{{ nextDot }}"></span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+
+    </div>
+
+    <!-- TOAST -->
+    <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+      <div style="position:fixed;bottom:24px;right:24px;z-index:50;display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--surface);border:1px solid var(--hairline);border-left:3px solid var(--accent);border-radius:10px;box-shadow:var(--shadow-overlay);animation:sb-rise .2s ease;max-width:420px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C5D4C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M20 6 9 17l-5-5"/></svg>
+        <div><p style="font:500 13px Inter;color:var(--ink);margin:0 0 2px">{{ toastTitle }}</p><p style="font:400 12px Inter;color:var(--ink-muted);margin:0">Your local model will learn from this.</p></div>
+      </div>
+    </sc-if>
+
+    <!-- CONFIRM MODAL -->
+    <sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
+      <div style="position:fixed;inset:0;z-index:60;background:rgba(22,20,15,0.32);display:flex;align-items:center;justify-content:center;padding:24px">
+        <div style="background:var(--surface);border-radius:16px;box-shadow:var(--shadow-overlay);padding:28px;max-width:400px;width:100%;animation:sb-rise .18s ease">
+          <h3 style="font-family:Fraunces;font-weight:500;font-size:20px;margin:0 0 8px">Unsaved changes</h3>
+          <p style="font:400 14px/1.5 Inter;color:var(--ink-secondary);margin:0 0 22px">You've corrected fields on this receipt. Save before moving on?</p>
+          <div style="display:flex;gap:10px;justify-content:flex-end">
+            <button onClick="{{ discardNav }}" style="height:38px;padding:0 14px;border:none;border-radius:8px;background:transparent;color:var(--danger);font:500 13px Inter;cursor:pointer">Discard</button>
+            <button onClick="{{ closeModal }}" style="height:38px;padding:0 14px;border:1px solid var(--hairline);border-radius:8px;background:var(--surface);color:var(--ink);font:500 13px Inter;cursor:pointer">Keep editing</button>
+            <button onClick="{{ saveNav }}" style="height:38px;padding:0 16px;border:none;border-radius:8px;background:var(--accent);color:#fff;font:500 13px Inter;cursor:pointer">Save</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:920},&quot;receipt&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;bluebottle&quot;,&quot;officedepot&quot;],&quot;default&quot;:&quot;bluebottle&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;imageMissing&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  catColors = {Groceries:'#5C7457',Meals:'#8A5A44',Travel:'#3A6EA5',Transport:'#45758A',Office:'#B7791F',Utilities:'#2F6F62',Software:'#6B5B95',Other:'#8C877E'};
+  buildData(key){
+    if(key==='officedepot'){
+      return {
+        meta:{vendor:'Office Depot',address:'1455 Market St, San Francisco',sub:'2026-06-14 · $43.20 · receipt #00479',overall:71},
+        fields:{
+          vendor:{value:'Office Depot',conf:88}, date:{value:'2026-06-14',conf:73}, payment:{value:'VISA ••1142',conf:61},
+          category:{value:'Office',conf:68}, subtotal:{value:'40.00',conf:70}, tax:{value:'3.20',conf:66}, total:{value:'43.20',conf:78}, note:{value:'',conf:100},
+        },
+        items:[{id:1,desc:'Printer Paper, 500ct',qty:1,price:14.49,conf:64},{id:2,desc:'Gel Pens 12pk',qty:1,price:9.99,conf:58},{id:3,desc:'Ink Cartridge',qty:1,price:15.52,conf:71}],
+      };
+    }
+    return {
+      meta:{vendor:'Blue Bottle Coffee',address:'66 Mint St, San Francisco',sub:'2026-06-15 · $18.50 · receipt #00482',overall:98},
+      fields:{
+        vendor:{value:'Blue Bottle Coffee',conf:99}, date:{value:'2026-06-15',conf:97}, payment:{value:'VISA ••1142',conf:89},
+        category:{value:'Meals',conf:91}, subtotal:{value:'16.75',conf:95}, tax:{value:'1.75',conf:86}, total:{value:'18.50',conf:98}, note:{value:'',conf:100},
+      },
+      items:[{id:1,desc:'Cappuccino',qty:1,price:5.25,conf:94},{id:2,desc:'Drip Coffee',qty:1,price:4.00,conf:92},{id:3,desc:'Almond Croissant',qty:1,price:6.50,conf:76}],
+    };
+  }
+  initFor(key){ const d=this.buildData(key); const fields={}; for(const k in d.fields){ fields[k]={...d.fields[k],edited:false,confirmed:false}; } const items=d.items.map(i=>({...i,edited:false,confirmed:false})); return {key,meta:d.meta,fields,items,active:null}; }
+  state = { ...this.initFor('bluebottle'), showBoxes:true, toast:false, toastTitle:'', modal:false, pendingKey:null };
+  componentDidMount(){ const p=this.props.receipt; if(p && p!==this.state.key) this.setState({...this.initFor(p)}); if(this.props.imageMissing) this.forceUpdate(); }
+  componentDidUpdate(prev){ if(prev.receipt!==this.props.receipt && this.props.receipt && this.props.receipt!==this.state.key) this.setState({...this.initFor(this.props.receipt)}); }
+  hexToRgba(hex,a){const c=hex.replace('#','');return `rgba(${parseInt(c.slice(0,2),16)},${parseInt(c.slice(2,4),16)},${parseInt(c.slice(4,6),16)},${a})`;}
+  fmt(n){return '$'+(isNaN(n)?0:n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  num(v){ return parseFloat(String(v).replace(/[^0-9.-]/g,''))||0; }
+  confMeta(c){ if(c>=90) return {label:'High',hex:'#1C5D4C',soft:'var(--success-soft)'}; if(c>=70) return {label:'Review',hex:'#B7791F',soft:'var(--warning-soft)'}; return {label:'Low',hex:'#B23A2E',soft:'var(--danger-soft)'}; }
+  updateField(name,value){ this.setState(s=>{ const cur=s.fields[name]; return {fields:{...s.fields,[name]:{...cur,value,edited:true,confirmed: cur.conf<90?true:cur.confirmed}}}; }); }
+  updateItem(id,key,value){ this.setState(s=>({items:s.items.map(it=> it.id===id?{...it,[key]:value,edited:true,confirmed: it.conf<90?true:it.confirmed}:it)})); }
+  anyEdited(){ return Object.values(this.state.fields).some(f=>f.edited) || this.state.items.some(i=>i.edited); }
+  save(){ const n=Object.values(this.state.fields).filter(f=>f.edited).length + this.state.items.filter(i=>i.edited).length;
+    this.setState(s=>{ const fields={}; for(const k in s.fields){ const f=s.fields[k]; fields[k]={...f,edited:false,confirmed:f.edited?true:f.confirmed}; } const items=s.items.map(i=>({...i,edited:false,confirmed:i.edited?true:i.confirmed})); return {fields,items,toast:true,toastTitle:`Saved — ${n} field${n===1?'':'s'} corrected.`}; });
+    clearTimeout(this._t); this._t=setTimeout(()=>this.setState({toast:false}),3600);
+  }
+  rerun(){ this.setState({toast:true,toastTitle:'Re-extracted locally in 1.8s.'}); clearTimeout(this._t); this._t=setTimeout(()=>this.setState({toast:false}),3000); }
+  nav(targetKey){ if(this.anyEdited()){ this.setState({modal:true,pendingKey:targetKey}); } else { this.setState({...this.initFor(targetKey),showBoxes:this.state.showBoxes}); } }
+  renderVals(){
+    const s=this.state;
+    const imageMissing = !!this.props.imageMissing;
+    const boxFor=(name)=>{ if(!s.showBoxes) return {bg:'transparent',border:'1px solid transparent'}; if(s.active===name) return {bg:'rgba(28,93,76,0.22)',border:'1px solid #1C5D4C'}; return {bg:'rgba(28,93,76,0.14)',border:'1px solid rgba(28,93,76,0.32)'}; };
+    const el=React.createElement;
+    const indicator=(f,small)=>{ const m=this.confMeta(f.conf); if(f.confirmed){ return el('span',{style:{display:'inline-flex',alignItems:'center',gap:'5px',font:"500 12px 'IBM Plex Mono'",color:'#1C5D4C'}}, el('span',{style:{display:'inline-flex',width:'14px',height:'14px',borderRadius:'999px',background:'#1C5D4C',color:'#fff',alignItems:'center',justifyContent:'center',fontSize:'9px',flex:'none'}},'✓'), small?'100':'100% · you'); }
+      return el('span',{style:{display:'inline-flex',alignItems:'center',gap:'6px',font:"500 12px 'IBM Plex Mono'",color:m.hex}}, f.conf+'%', el('span',{style:{font:'500 11px Inter'}}, m.label)); };
+    const tag=(f)=>{ if(f.confirmed) return el('span',{style:{font:"500 10px 'IBM Plex Mono'",letterSpacing:'0.04em',color:'#1C5D4C',background:'var(--accent-soft)',padding:'2px 6px',borderRadius:'4px'}},'CONFIRMED'); if(f.edited) return el('span',{style:{font:"500 10px 'IBM Plex Mono'",letterSpacing:'0.04em',color:'#B7791F',background:'var(--warning-soft)',padding:'2px 6px',borderRadius:'4px'}},'EDITED'); if(f.conf<70) return el('button',{onClick:()=>this.setState({active:null}),style:{border:'none',background:'transparent',color:'#B23A2E',font:'500 12px Inter',cursor:'pointer',padding:0,textDecoration:'underline',textUnderlineOffset:'2px'}},'Check this?'); return null; };
+    const mk=(name)=>{ const f=s.fields[name]; const m=this.confMeta(f.conf); const active=s.active===name; const col=f.confirmed?'#1C5D4C':m.hex; const fb=boxFor(name);
+      return { value:f.value, onInput:(e)=>this.updateField(name,e.target.value), activate:()=>this.setState({active:name}),
+        bcol: active?'#1C5D4C':(f.confirmed?'#1C5D4C':this.hexToRgba(m.hex,0.45)), lcol:col, ring: active?'0 0 0 3px rgba(28,93,76,0.18)':'none',
+        ind:indicator(f,false), indSm:indicator(f,true), tag:tag(f), pct:f.conf+'%', money:this.fmt(this.num(f.value)),
+        boxBg:fb.bg, boxBorder:fb.border }; };
+    const f={vendor:mk('vendor'),date:mk('date'),payment:mk('payment'),subtotal:mk('subtotal'),tax:mk('tax'),total:mk('total'),note:mk('note'),category:{}};
+    // category
+    const cf=s.fields.category; const cm=this.confMeta(cf.conf); const cActive=false;
+    const catList=['Groceries','Meals','Travel','Transport','Office','Utilities','Software','Other'];
+    f.category={ pct:cf.conf+'%', bcol:cf.confirmed?'#1C5D4C':this.hexToRgba(cm.hex,0.45), lcol:cf.confirmed?'#1C5D4C':this.catColors[cf.value]||cm.hex,
+      options: el(React.Fragment,null, catList.map(c=>el('option',{key:c,value:c,selected:c===cf.value},c))),
+      onSelect:(e)=>this.updateField('category',e.target.value) };
+
+    const items=s.items.map(it=>{ const m=this.confMeta(it.conf); const col=it.confirmed?'#1C5D4C':m.hex;
+      return { id:it.id, desc:it.desc, qty:it.qty, priceStr:this.fmt(it.price), lcol:col,
+        activate:()=>this.setState({active:'item-'+it.id}),
+        onDesc:(e)=>this.updateItem(it.id,'desc',e.target.value),
+        onQty:(e)=>this.updateItem(it.id,'qty',e.target.value),
+        onPrice:(e)=>this.updateItem(it.id,'price',this.num(e.target.value)),
+        remove:()=>this.setState(st=>({items:st.items.filter(x=>x.id!==it.id)})),
+        dot: el('span',{style:{width:'7px',height:'7px',borderRadius:'999px',background:col,flex:'none'},title:it.conf+'%'}) };
+    });
+    const paperItems=s.items.map(it=>{ const fb=boxFor('item-'+it.id); return {desc:it.desc,qty:it.qty,priceStr:this.fmt(it.price),boxBg:fb.bg,boxBorder:fb.border,activate:()=>this.setState({active:'item-'+it.id})}; });
+
+    // reconciliation: subtotal + tax == total
+    const sub=this.num(s.fields.subtotal.value), tx=this.num(s.fields.tax.value), tot=this.num(s.fields.total.value);
+    const recoOk=Math.abs((sub+tx)-tot)<0.005;
+    const reco = recoOk
+      ? {soft:'var(--accent-soft)',border:'var(--accent)',color:'var(--accent-strong)',text:`Subtotal + tax = ${this.fmt(tot)} ✓`,icon:el('svg',{width:18,height:18,viewBox:'0 0 24 24',fill:'none',stroke:'#1C5D4C','stroke-width':1.8,'stroke-linecap':'round','stroke-linejoin':'round',style:{flex:'none'}},el('path',{d:'M20 6 9 17l-5-5'}))}
+      : {soft:'var(--warning-soft)',border:'var(--warning)',color:'#16140F',text:`Subtotal + tax = ${this.fmt(sub+tx)}, but total reads ${this.fmt(tot)} — check the figures.`,icon:el('svg',{width:18,height:18,viewBox:'0 0 24 24',fill:'none',stroke:'#B7791F','stroke-width':1.6,'stroke-linecap':'round','stroke-linejoin':'round',style:{flex:'none'}},el('path',{d:'m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z'}),el('path',{d:'M12 9v4'}),el('path',{d:'M12 17h.01'}))};
+
+    const overall=s.meta.overall; const om=this.confMeta(overall);
+    const edited=this.anyEdited();
+    const otherKey = s.key==='bluebottle'?'officedepot':'bluebottle';
+    const prevName = s.key==='bluebottle'?'United Airlines':'Blue Bottle';
+    const nextName = s.key==='bluebottle'?'Office Depot':'AWS';
+
+    return {
+      vendorName:s.meta.vendor, vendorUpper:s.meta.vendor.toUpperCase(), addressLine:s.meta.address, subtitle:s.meta.sub,
+      overallPct:overall+'%', overallLabel:om.label, overallColor:om.hex, overallSoft:om.soft,
+      f, items, paperItems,
+      anyEdited:edited, saveDisabled:!edited, saveOpacity: edited?1:0.4,
+      showLowNote: overall<90, showCleanNote: overall>=95 && recoOk && !edited,
+      imageMissing, showImage:!imageMissing,
+      showBoxes:s.showBoxes, toggleBoxes:()=>this.setState(st=>({showBoxes:!st.showBoxes})),
+      boxesBtnBg: s.showBoxes?'var(--accent-soft)':'transparent', boxesBtnFg: s.showBoxes?'var(--accent)':'var(--ink-secondary)',
+      recoSoft:reco.soft, recoBorder:reco.border, recoColor:reco.color, recoText:reco.text, recoIcon:reco.icon,
+      addItem:()=>this.setState(st=>({items:[...st.items,{id:Date.now(),desc:'',qty:1,price:0,conf:100,confirmed:true,edited:true}]})),
+      save:()=>this.save(), rerun:()=>this.rerun(), saveNext:()=>{ this.save(); setTimeout(()=>this.setState({...this.initFor(otherKey),showBoxes:this.state.showBoxes}),300); },
+      prev:()=>this.nav(otherKey), next:()=>this.nav(otherKey), prevName, nextName,
+      prevDot: s.key==='bluebottle'?'#B7791F':'#1C5D4C', nextDot: s.key==='bluebottle'?'#B23A2E':'#1C5D4C',
+      toast:s.toast, toastTitle:s.toastTitle,
+      modal:s.modal, closeModal:()=>this.setState({modal:false,pendingKey:null}),
+      discardNav:()=>this.setState({...this.initFor(s.pendingKey),showBoxes:s.showBoxes,modal:false,pendingKey:null}),
+      saveNav:()=>{ this.save(); const pk=s.pendingKey; setTimeout(()=>this.setState({...this.initFor(pk),showBoxes:this.state.showBoxes,modal:false,pendingKey:null}),300); },
+    };
+  }
+}
+</script>
+</body>
+</html>
