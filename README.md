@@ -54,7 +54,7 @@ on your personal documents.
 - **M2** — Local structured extraction (Ollama + Qwen 3B) behind an `Extractor` interface; Gemini / Groq cloud adapters ✅
 - **M3** — Labeled benchmark (SROIE): field accuracy / latency / cost-per-1k; quantization study ✅
 - **M4** — scikit-learn expense-category classifier (macro-F1 0.49 vs 0.09 majority) ✅
-- **M5** — QLoRA fine-tune via MLX; publish weights + model card on HF Hub
+- **M5** — QLoRA fine-tune via MLX: tuned **80% vs base 72%** on SROIE; [published to HF Hub](https://huggingface.co/Qweffy/shoebox-receipts-qwen3b) ✅
 - **M6** — Local web dashboard (Overview / Ledger / Benchmark) from the Claude Design handoff ✅
 
 Run the dashboard: `uv run uvicorn shoebox.web.app:app` → http://localhost:8000

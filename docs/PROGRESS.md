@@ -12,8 +12,14 @@ are logged here and worked around rather than stalling.
   groq-vision, $0, offline** (74.0% vs 82.7%). Quant sweep q4 64.7% → q8 74.0% → fp16 73.3%.
 - **M4 — category classifier** ✅ TF-IDF + LinearSVC, vendor-grouped stratified 5-fold CV;
   **macro-F1 0.487 vs 0.088 majority** on 987 SROIE receipts (weak keyword labels).
-- **M5 — QLoRA fine-tune + publish** ⏳
-- **M6 — dashboard from handoff** ⏳
+- **M5 — QLoRA fine-tune + publish** ✅ QLoRA (MLX) on Qwen2.5-3B-4bit; val loss 0.97→0.02;
+  tuned **80.0% vs base 72.2%** overall on SROIE test (+10 on total, +6.7 vendor/date);
+  published to HF Hub: Qweffy/shoebox-receipts-qwen3b. (Ollama GGUF = follow-up — MLX export
+  doesn't support Qwen.)
+- **M6 — dashboard from handoff** ✅ FastAPI + Jinja, warm-ledger aesthetic faithful to the
+  handoff. Overview / Ledger / Benchmark fully built and wired to real data (ledger CSV +
+  benchmark results); Import & Settings are stubs. Verified in-browser (screenshots).
+  *Follow-up:* full Receipt Detail / Import / Settings builds.
 
 ## Blockers / decisions (flag-and-continue)
 - **M2 local model is imperfect (expected, not a bug).** On synthetic receipts Qwen 3B
