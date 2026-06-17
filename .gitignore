@@ -22,5 +22,5 @@ wheels/
 !/data/receipts/.gitkeep
 
 # Generated output
-/ledger.csv
+/ledger*.csv
 *.ledger.csv

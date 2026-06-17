@@ -9,6 +9,8 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "numpy>=2.4.6",
+    "ollama>=0.6.2",
+    "openai>=2.43.0",
     "opencv-python-headless>=4.13.0.92",
     "paddleocr>=3.4.1",
     "paddlepaddle>=3.3.1",
@@ -46,7 +48,7 @@ strict = true
 files = ["src", "tests", "scripts"]
 
 [[tool.mypy.overrides]]
-module = ["paddleocr.*", "paddle.*", "cv2.*"]
+module = ["paddleocr.*", "paddle.*", "cv2.*", "ollama", "ollama.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

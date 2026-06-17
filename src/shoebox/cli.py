@@ -10,7 +10,7 @@ from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
-from shoebox.extract import RegexExtractor
+from shoebox.extract import get_extractor
 from shoebox.ledger import to_ledger_row, write_ledger
 from shoebox.models import LedgerRow
 from shoebox.ocr import OcrEngine
@@ -49,6 +49,9 @@ def process(
     threshold: Annotated[
         bool, typer.Option(help="Adaptive-threshold before OCR (off by default).")
     ] = False,
+    extractor_name: Annotated[
+        str, typer.Option("--extractor", help="Field extractor: regex|local|gemini|groq.")
+    ] = "local",
 ) -> None:
     """Process receipts into a CSV ledger with confidence scores."""
     images = _gather_images(input_path)
@@ -57,7 +60,10 @@ def process(
         raise typer.Exit(code=1)
 
     engine = OcrEngine(lang=lang)
-    extractor = RegexExtractor()
+    try:
+        extractor = get_extractor(extractor_name)
+    except ValueError as error:
+        raise typer.BadParameter(str(error)) from error
     rows: list[LedgerRow] = []
 
     with Progress(
