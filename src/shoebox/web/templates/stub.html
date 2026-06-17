@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block main %}
+<div style="margin-bottom:28px">
+  <p style="font:600 12px Inter;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 10px">{{ title }}</p>
+  <h1 class="sb-serif" style="font-weight:500;font-size:32px;letter-spacing:-0.01em;margin:0">{{ title }}</h1>
+</div>
+<div class="sb-card" style="text-align:center;padding:64px 24px">
+  <p style="font:400 16px/1.6 Inter;color:var(--ink-secondary);margin:0 0 8px">This screen is fully designed in the handoff (<span class="sb-mono">docs/design/</span>); the functional build is the next step.</p>
+  <p style="font:400 14px Inter;color:var(--ink-muted);margin:0">{{ note }}</p>
+</div>
+{% endblock %}
