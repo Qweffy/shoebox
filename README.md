@@ -5,7 +5,9 @@ offline, no receipt ever leaves your laptop.** The deliberate counter-narrative 
 cloud bill-reader: same document domain, opposite deployment philosophy, benchmarked
 head-to-head against frontier cloud vision.
 
-> Headline (measured in M3): **"X% of frontier cloud-vision accuracy, at $0 and fully offline."**
+> **Measured (M3, SROIE test):** the local stack (PaddleOCR + Qwen-3B q8) reaches **~90% of
+> frontier cloud-vision accuracy** (Groq Llama-4-Scout) on field-level extraction — at **$0**
+> and **fully offline**. 74.0% vs 82.7% overall; see [`benchmark/RESULTS.md`](benchmark/RESULTS.md).
 
 Built on Python 3.12, OpenCV + PaddleOCR (PP-OCRv5) for OCR, a local LLM (Ollama + Qwen
 3B) for structured extraction, scikit-learn for category classification, and a QLoRA
@@ -48,11 +50,13 @@ on your personal documents.
 
 ## Roadmap
 
-- **M1** — OCR ledger CLI ✅ *(this milestone)*
-- M2 — Local structured extraction (Ollama + Qwen 3B) behind an `Extractor` interface; Gemini / Groq cloud adapters
-- M3 — Labeled benchmark (SROIE + CORD): field accuracy / latency / cost-per-1k-docs; quantization study
-- M4 — scikit-learn expense-category classifier
-- M5 — QLoRA fine-tune via MLX; publish weights + model card on HF Hub
-- M6 — Local web dashboard + the benchmark story as the headline
+- **M1** — OCR ledger CLI ✅
+- **M2** — Local structured extraction (Ollama + Qwen 3B) behind an `Extractor` interface; Gemini / Groq cloud adapters ✅
+- **M3** — Labeled benchmark (SROIE): field accuracy / latency / cost-per-1k; quantization study ✅
+- **M4** — scikit-learn expense-category classifier (macro-F1 0.49 vs 0.09 majority) ✅
+- **M5** — QLoRA fine-tune via MLX; publish weights + model card on HF Hub
+- **M6** — Local web dashboard (Overview / Ledger / Benchmark) from the Claude Design handoff ✅
+
+Run the dashboard: `uv run uvicorn shoebox.web.app:app` → http://localhost:8000
 
 See [`AGENTS.md`](AGENTS.md) for house conventions.
