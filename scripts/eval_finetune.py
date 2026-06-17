@@ -57,7 +57,9 @@ def main() -> None:
             {"role": "system", "content": _SYSTEM_PROMPT},
             {"role": "user", "content": _build_user_prompt(text)},
         ]
-        prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
+        prompt = tokenizer.apply_chat_template(  # type: ignore[no-untyped-call]
+            messages, add_generation_prompt=True, tokenize=False
+        )
         output = generate(model, tokenizer, prompt=prompt, max_tokens=128, verbose=False)
         entities = row.get("entities") or {}
         scored.append(
