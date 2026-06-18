@@ -13,7 +13,18 @@ Built on Python 3.12, OpenCV + PaddleOCR (PP-OCRv5) for OCR, a local LLM (Ollama
 3B) for structured extraction, scikit-learn for category classification, and a QLoRA
 fine-tune via MLX. Cloud comparison adapters (Gemini, Groq) are all free-tier.
 
-## M1 — OCR ledger CLI (this milestone)
+## The dashboard
+
+A local web dashboard (FastAPI + Jinja) you run on your own machine — there's no hosted
+URL by design: the whole point is that nothing leaves the laptop.
+
+![Overview](docs/screenshots/overview.png)
+
+The **Benchmark** view is the headline, made visual — local vs the cloud frontier:
+
+![Benchmark](docs/screenshots/benchmark.png)
+
+## Quickstart
 
 ```bash
 uv sync                                            # install deps (Python 3.12, pinned)
